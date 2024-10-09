@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head><link rel="stylesheet" href="home.css">
+<body>
+    <div class="box">
+        <div class="search">
+            <input type="text" placeholder="Entry city name">
+            <button><img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20101%20101%22%3E%3Cpath%20d%3D%22M63.3%2059.9c3.8-4.6%206.2-10.5%206.2-17%200-14.6-11.9-26.5-26.5-26.5S16.5%2028.3%2016.5%2042.9%2028.4%2069.4%2043%2069.4c6.4%200%2012.4-2.3%2017-6.2l20.6%2020.6c.5.5%201.1.7%201.7.7.6%200%201.2-.2%201.7-.7.9-.9.9-2.5%200-3.4L63.3%2059.9zm-20.4%204.7c-12%200-21.7-9.7-21.7-21.7s9.7-21.7%2021.7-21.7%2021.7%209.7%2021.7%2021.7-9.7%2021.7-21.7%2021.7z%22%2F%3E%3C%2Fsvg%3E">
+            </button>
+
+
+        </div>
+        <div class="weather">
+
+            <img src="https://cdn3d.iconscout.com/3d/premium/thumb/cloudy-weather-3d-illustration-download-in-png-blend-fbx-gltf-file-formats--sunny-sun-light-pack-nature-illustrations-2754892.png?f=webp"class="weather-icon">
+<h1 class="temp">22°C</h1>
+<h2 class="city">Ramsinghpur</h2>
+
+<div class="ditels">
+    <div class="col">
+        <img src="https://cdn3d.iconscout.com/3d/premium/thumb/water-humidity-3d-icon-download-in-png-blend-fbx-gltf-file-formats--weather-humid-forecast-pack-nature-icons-6293694.png?f=webp" alt="">
+        <div>
+            <p class="humdity">50%</p>
+            <p>humidity</p>
+        </div>
+    </div>
+
+    <div class="col">
+        <img src="https://cdn3d.iconscout.com/3d/premium/thumb/foggy-weather-forecast-icon-3d-download-in-png-blend-fbx-gltf-file-formats--fog-cloud-mist-overcast-pack-nature-icons-8460078.png?f=webp" alt="">
+        <div>
+            <p class="wind">50%</p>
+            <p>wind speed</p>
+</div>
+
+        </div>
+    </div>
+    <script>
+        const apikey="4594b1552c513064b04452a8a59caef5";
+        const apiurl="https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+        
+        
+        const searchbox = document.querySelector(".search input");
+        const searchbtn = document.querySelector(".search button");
+        
+        async function checkweather(city){
+
+            const respont =await fetch(apiurl +  city + `&appid=${apikey}`)
+            const data = await respont.json();
+          console.log(data);
+          
+            const name = document.querySelector(".city").innerHTML=data.name;
+        document.querySelector(".temp").innerHTML=Math.round(data.main.temp)+"°C";
+        document.querySelector(".humdity").innerHTML=data.main.humidity;
+        document.querySelector(".wind").innerHTML=data.wind.speed;
+            
+        }
+        searchbtn.addEventListener("click", () => {
+            const city =searchbox.value;
+            checkweather(city);
+
+
+
+        });
+
+     
+
+    </script>
+</body>
+</html>
